@@ -37,6 +37,11 @@ export class InscriptionComponent implements OnInit {
         tel: new FormControl('',[
           Validators.required,
           Validators.pattern('[002162,002165,002169]{6}[0-9]{7}')
+        ]),
+        repPassword :new FormControl('',[
+          Validators.required,
+          Validators.minLength(8)
+
         ])
       }
      
@@ -50,6 +55,7 @@ export class InscriptionComponent implements OnInit {
   get prenom(){ return this.inscriptionForm.get('prenom')}
   get tel(){return this.inscriptionForm.get('tel')}
   get email(){return this.inscriptionForm.get('email')}
+  get repPassword(){return this.inscriptionForm.get('repPassword')}
 
 
 
