@@ -1,0 +1,116 @@
+<app-nav></app-nav>
+<div class="container">
+
+  <form [formGroup]="inscriptionForm" (ngSubmit)="inscription()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputNom">Nom</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputNom" 
+        placeholder="Nom"
+        formControlName="nom"
+        >
+        <div *ngIf="nom.touched && nom.invalid" class="alert alert-danger">
+          <div *ngIf="nom.errors.required">
+              le nom est obligatoire
+          </div>
+          <div *ngIf="nom.errors.minlength">
+              le nom doit comporte au minimum {{ nom.errors.minlength.requiredLength }} caractere(s)
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group col-md-6">
+        <label for="inputPrenom">Prenom</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputPrenom" 
+        placeholder="Prenom"
+        formControlName="prenom"
+        >
+        <div *ngIf="prenom.touched && prenom.invalid" class="alert alert-danger">
+          <div *ngIf="prenom.errors.required">
+              le nom est obligatoire
+          </div>
+          <div *ngIf="prenom.errors.minlength">
+              le prenom doit comporte au minimum {{ prenom.errors.minlength.requiredLength }} caractere(s)
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail">Email</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputEmail" 
+        placeholder="Email"
+        formControlName="email"
+        >
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+              le mail est obligatoire
+          </div>
+          <div *ngIf="email.errors.email">
+              Email erroné
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="form-group col-md-6">
+        <label for="inputTom">Tel</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputTel" 
+        placeholder="Tel"
+        formControlName="tel"
+        >
+        <div *ngIf="tel.touched && tel.invalid" class="alert alert-danger">
+          <div *ngIf="tel.errors.required">
+              le tel est obligatoire
+          </div>
+          <div *ngIf="tel.errors.pattern">
+              le num du tel doit comporte au minimum 13 caracteres et au maximum 13 caracteres
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputPasswd">Password</label>
+        <input 
+              type="text" 
+              class="form-control" 
+              id="inputPasswd" 
+              placeholder="Password"
+              formControlName="password"
+              >
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+              le mot de passe est obligatoire
+          </div>
+          <div *ngIf="password.errors.minlength">
+              le mot de passe doit comporte au minimum {{ password.errors.minlength.requiredLength }} caractere(s)
+          </div>
+        </div>
+      </div>
+     
+      <div class="form-group col-md-6">
+        <label for="inputRepPwd">Repeter Password</label>
+        <input type="text" class="form-control" id="inputRepPwd" placeholder="RepPassword">
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" [disabled]="inscriptionForm.invalid">Sign in</button>
+  </form>
+
+
+</div>
+<app-footer></app-footer>
