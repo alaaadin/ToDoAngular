@@ -1,6 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { TodoService } from '../services/todo.service';
+
 
 @Component({
   selector: 'app-list-to-do',
@@ -13,24 +16,9 @@ export class ListToDoComponent implements OnInit {
   message: string;
   isPrimary = true;
   todo = "ToDo List";
-  i:number;
+  i: number;
 
-  toDOs = [{
-    description: "description1",
-    dateAjout: new Date()
-
-  },
-  {
-    description: "description2",
-    dateAjout: new Date()
-
-  },
-  {
-    description: "description3",
-    dateAjout: new Date()
-
-  }
-  ]
+  toDOs = [ ]
 
 
   doneS = [{
@@ -55,7 +43,7 @@ export class ListToDoComponent implements OnInit {
 
 
 
-  constructor(private toastr: ToastrService, private modalService: BsModalService) { }
+  constructor(private toastr: ToastrService, private ts: TodoService, private modalService: BsModalService) { }
 
 
 
@@ -64,8 +52,8 @@ export class ListToDoComponent implements OnInit {
     this.toastr.success('suppression avec succes', 'supprimé');
   }
 
-  openModal(template: TemplateRef<any>,i:number) {
-this.i=i;
+  openModal(template: TemplateRef<any>, i: number) {
+    this.i = i;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
@@ -101,8 +89,22 @@ this.i=i;
     this.toDOs.splice(i, 1);
   }
 
+  ngOnInit(){
+    const helper = new JwtHelperService();
+    let token = localStorage.getItem('token');
+    const decodedToken = helper.decodeToken(token);
+    let _creator= decodedToken._id;
+    console.log(_creator);
+    
+    this.ts.ListTodos({_creator}).subscribe(
+      res => {
+        console.log(res);
+        this.toDOs = res.todos;
+      },
+      err => {
+        console.log(err);
+      }
+    )
 
-  ngOnInit() {
   }
-
 }

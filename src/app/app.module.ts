@@ -19,7 +19,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap/modal';
 //import reactive forms
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from './services/user.service';
+import {HttpClientModule} from '@angular/common/http' ;
+import { TodoService } from './services/todo.service';
 
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,9 +45,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    TodoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

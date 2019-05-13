@@ -4,42 +4,41 @@
   <form [formGroup]="inscriptionForm" (ngSubmit)="inscription()">
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inputNom">Nom</label>
+        <label for="inputFirstname">Firstname</label>
         <input type="text" 
         class="form-control" 
-        id="inputNom" 
-        placeholder="Nom"
-        formControlName="nom"
+        id="inputFirstname" 
+        placeholder="firstname"
+        formControlName="firstname"
         >
-        <div *ngIf="nom.touched && nom.invalid" class="alert alert-danger">
-          <div *ngIf="nom.errors.required">
+        <div *ngIf="firstname.touched && firstname.invalid" class="alert alert-danger">
+          <div *ngIf="firstname.errors.required">
               le nom est obligatoire
           </div>
-          <div *ngIf="nom.errors.minlength">
-              le nom doit comporte au minimum {{ nom.errors.minlength.requiredLength }} caractere(s)
+          <div *ngIf="firstname.errors.minlength">
+              le firstname doit comporte au minimum {{ firstname.errors.minlength.requiredLength }} caractere(s)
           </div>
         </div>
       </div>
       
       <div class="form-group col-md-6">
-        <label for="inputPrenom">Prenom</label>
+        <label for="inputlastname">lastname</label>
         <input type="text" 
         class="form-control" 
-        id="inputPrenom" 
-        placeholder="Prenom"
-        formControlName="prenom"
+        id="inputlastname" 
+        placeholder="lastname"
+        formControlName="lastname"
         >
-        <div *ngIf="prenom.touched && prenom.invalid" class="alert alert-danger">
-          <div *ngIf="prenom.errors.required">
+        <div *ngIf="lastname.touched && lastname.invalid" class="alert alert-danger">
+          <div *ngIf="lastname.errors.required">
               le nom est obligatoire
           </div>
-          <div *ngIf="prenom.errors.minlength">
-              le prenom doit comporte au minimum {{ prenom.errors.minlength.requiredLength }} caractere(s)
+          <div *ngIf="lastname.errors.minlength">
+              le lastname doit comporte au minimum {{ lastname.errors.minlength.requiredLength }} caractere(s)
           </div>
         </div>
       </div>
     </div>
-
 
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -54,9 +53,7 @@
           <div *ngIf="email.errors.required">
               le mail est obligatoire
           </div>
-          <div *ngIf="email.errors.email">
-              Email erroné
-          </div>
+          
         </div>
       </div>
       
@@ -85,7 +82,7 @@
       <div class="form-group col-md-6">
         <label for="inputPasswd">Password</label>
         <input 
-              type="text" 
+              type="password" 
               class="form-control" 
               id="inputPasswd" 
               placeholder="Password"
@@ -102,13 +99,30 @@
       </div>
      
       <div class="form-group col-md-6">
-        <label for="inputRepPwd">Repeter Password</label>
-        <input type="text" class="form-control" id="inputRepPwd" placeholder="RepPassword">
+        <label for="inputRepPassword">Repeter Password</label>
+        <input 
+              type="password" 
+              class="form-control" 
+              id="inputRepPasswd" 
+              placeholder="repPassword"
+              formControlName="repPassword"
+              >
+        <div *ngIf="repPassword.touched && repPassword.invalid" class="alert alert-danger">
+          <div *ngIf="repPassword.errors.required">
+              la confirmation du mot de passe est obligatoire
+          </div>
+          <div *ngIf="repPassword.errors.minlength">
+              le mot de passe doit comporte au minimum {{ repPassword.errors.minlength.requiredLength }} caractere(s)
+          </div>
+          
+        </div>
+        <div *ngIf="repPassword.valid && inscriptionForm.invalid && inscriptionForm.errors.passwordShouldMatch" class="alert alert-danger">
+          les mots de passe ne correpondent pas 
+        </div>
       </div>
     </div>
-
-
     <button type="submit" class="btn btn-primary" [disabled]="inscriptionForm.invalid">Sign in</button>
+    
   </form>
 
 
